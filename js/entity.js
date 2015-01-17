@@ -101,8 +101,8 @@ function Entity (type, xPos, yPos, volume, direction, speed, heightScale, jumpHe
             this.hitBox.pos.x += this.vx;
             this.hitBox.pos.y += this.vy;
             this.jumpStep += this.jumpSpeed;
-            this.z = this.hitBox.pos.x + this.hitBox.pos.y;
-			//this.z = (this.hitBox.pos.x + this.hitBox.points[1].x) + (this.hitBox.pos.y + this.hitBox.points[1].y);
+            //this.z = this.hitBox.pos.x + this.hitBox.pos.y;
+			this.z = (this.hitBox.pos.x + this.hitBox.points[1].x) + (this.hitBox.pos.y + this.hitBox.points[1].y);
         }
         else if (this.type == "player"){
             var y = 0;
@@ -144,8 +144,8 @@ function Entity (type, xPos, yPos, volume, direction, speed, heightScale, jumpHe
                 camera.y = cameraPos["y"] -canvas.height/2;
             }
             this.jumpStep += this.jumpSpeed;
-            this.z = this.hitBox.pos.x + this.hitBox.pos.y;
-			//this.z = (this.hitBox.pos.x + this.hitBox.points[1].x) + (this.hitBox.pos.y + this.hitBox.points[1].y);
+            //this.z = this.hitBox.pos.x + this.hitBox.pos.y;
+			this.z = (this.hitBox.pos.x + this.hitBox.points[1].x) + (this.hitBox.pos.y + this.hitBox.points[1].y);
         }
         else{
             console.log("invalid entity type, cant move ffs");

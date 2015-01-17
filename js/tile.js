@@ -95,19 +95,15 @@ function Tile (type, xPos, yPos, width, height){
         if (isometric){
             //drawcube
 			
-			
-			
-            //var bottom = this.getScreenSquare(this, -this.screenHeight);
-            //var top = this.getScreenSquare(this, 0);
-            
 			image = this.type;
-			heightOffset = this.sprite.image.height - 76;
+			heightOffset = this.sprite.image.height - 101;
 			var imagePos = this.getScreenSquare(this, heightOffset);
 			ctx.drawImage(this.sprite.image, 0, 0, this.sprite.image.width, this.sprite.image.height, (imagePos.hitBox.pos.x + imagePos.hitBox.points[0].x - camera.x), ((imagePos.hitBox.pos.y + imagePos.hitBox.points[3].y - camera.y)), this.sprite.image.width, this.sprite.image.height);
 		   
+		   
 		   /*
-		   
-		   
+		   var bottom = this.getScreenSquare(this, -this.screenHeight);
+           var top = this.getScreenSquare(this, 0);
            this.drawSquare(top, this.fillColor, this.strokeColor);
 		   // Temporary solution for left and right sides
             // Left
@@ -138,9 +134,9 @@ function Tile (type, xPos, yPos, width, height){
 
             ctx.stroke();
             ctx.fill();
-            ctx.closePath();
+            ctx.closePath();*/
 			
-			*/
+			
         }
         else{
             this.drawSquare(this, this.fillColor, this.strokeColor);
