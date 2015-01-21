@@ -1,4 +1,4 @@
-function Tile (type, xPos, yPos, width, height){  
+function Tile (type, zPos, xPos, yPos, width, height){  
     this.width = width;
     this.height = height;
     //this.volume = this.width * this.width * this.height
@@ -11,82 +11,28 @@ function Tile (type, xPos, yPos, width, height){
       new SAT.Vector(cellPoints.point3.x, cellPoints.point3.y),
       new SAT.Vector(cellPoints.point4.x, cellPoints.point4.y)
     ]);
-    
-    this.z = (this.hitBox.pos.x + this.hitBox.points[0].x) + (this.hitBox.pos.y + this.hitBox.points[3].y);
-	this.type = type;
-    if (this.type == "cityTiles_066"){
-		this.sprite = cityTiles_066;
-        this.fillColor = "rgba(200, 200, 200, 1)";
-        this.strokeColor = "rgba(100, 100, 100, 1)";
-        this.leftColor = "rgba(175, 175, 175, 1)";
-        this.rightColor = "rgba(150, 150, 150, 1)";
-    }
-	
-	else if (this.type == "cityTiles_059"){
-		this.sprite = cityTiles_059;
-        this.fillColor = "rgba(200, 200, 200, 1)";
-        this.strokeColor = "rgba(100, 100, 100, 1)";
-        this.leftColor = "rgba(175, 175, 175, 1)";
-        this.rightColor = "rgba(150, 150, 150, 1)";
-    }
-	else if (this.type == "cityTiles_073"){
-		this.sprite = cityTiles_073;
-        this.fillColor = "rgba(200, 200, 200, 1)";
-        this.strokeColor = "rgba(100, 100, 100, 1)";
-        this.leftColor = "rgba(175, 175, 175, 1)";
-        this.rightColor = "rgba(150, 150, 150, 1)";
-    }
-	else if (this.type == "cityTiles_064"){
-		this.sprite = cityTiles_064;
-        this.fillColor = "rgba(200, 200, 200, 1)";
-        this.strokeColor = "rgba(100, 100, 100, 1)";
-        this.leftColor = "rgba(175, 175, 175, 1)";
-        this.rightColor = "rgba(150, 150, 150, 1)";
-    }
-	else if (this.type == "cityTiles_067"){
-		this.sprite = cityTiles_067;
-        this.fillColor = "rgba(200, 200, 200, 1)";
-        this.strokeColor = "rgba(100, 100, 100, 1)";
-        this.leftColor = "rgba(175, 175, 175, 1)";
-        this.rightColor = "rgba(150, 150, 150, 1)";
-    }
-	else if (this.type == "cityTiles_097"){
-		this.sprite = cityTiles_097;
-        this.fillColor = "rgba(200, 200, 200, 1)";
-        this.strokeColor = "rgba(100, 100, 100, 1)";
-        this.leftColor = "rgba(175, 175, 175, 1)";
-        this.rightColor = "rgba(150, 150, 150, 1)";
-    }
+    this.zPos = zPos;
+    //this.z = (this.hitBox.pos.x + this.hitBox.points[0].x) + (this.hitBox.pos.y + this.hitBox.points[3].y);
+	//this.z = this.hitBox.pos.x + this.hitBox.pos.y;
+	this.z = (this.hitBox.pos.x + this.hitBox.points[3].x) + (this.hitBox.pos.y + this.hitBox.points[3].y) + 1000*this.zPos;
+	this.sprite = window[type];
+	this.fillColor = "rgba(200, 200, 200, 1)";
+     this.strokeColor = "rgba(100, 100, 100, 1)";
+     this.leftColor = "rgba(175, 175, 175, 1)";
+     this.rightColor = "rgba(150, 150, 150, 1)";
 
-    else if (this.type == "edge"){
-        this.fillColor = "rgba(200, 200, 200, 0)";
-        this.strokeColor = "rgba(100, 100, 100, 1)";
-        this.leftColor = "rgba(175, 175, 175, 0)";
-        this.rightColor = "rgba(150, 150, 150, 0)";
-	}
-    else{
-        console.log("something got fucky with the colors");
-        this.fillColor = "rgba(0, 0, 0, 1)";
-        this.strokeColor = "rgba(0, 0, 0, 1)";
-        this.leftColor = "rgba(0, 0, 0, 1)";
-        this.rightColor = "rgba(0, 0, 0, 1)";
-    }
     this.getScreenPos = function(){
         var worldPos = {};
         worldPos["x"] = this.hitBox.pos.x;
         worldPos["y"] = this.hitBox.pos.y;
         return worldToScreen(worldPos);
     }
-    this.hiddenToBasic = function(){
-        this.type = "basic";
-        this.fillColor = "rgba(200, 200, 200, 1)";
-        this.strokeColor = "rgba(100, 100, 100, 1)";
-        this.leftColor = "rgba(175, 175, 175, 1)";
-        this.rightColor = "rgba(150, 150, 150, 1)";
-    }
+
 	this.move = function (){
 		//just a placeholder
-		this.z = (this.hitBox.pos.x + this.hitBox.points[0].x) + (this.hitBox.pos.y + this.hitBox.points[3].y);
+		//this.z = this.hitBox.pos.x + this.hitBox.pos.y;
+		this.z = (this.hitBox.pos.x + this.hitBox.points[3].x) + (this.hitBox.pos.y + this.hitBox.points[3].y) + 1000*this.zPos;
+		//this.z = (this.hitBox.pos.x) + (this.hitBox.pos.y - this.hitBox.points[3].y);
 		
 		
 	}
@@ -95,8 +41,7 @@ function Tile (type, xPos, yPos, width, height){
         if (isometric){
             //drawcube
 			
-			image = this.type;
-			heightOffset = this.sprite.image.height - 101;
+			heightOffset = this.sprite.image.height - 101 + this.zPos;
 			var imagePos = this.getScreenSquare(this, heightOffset);
 			ctx.drawImage(this.sprite.image, 0, 0, this.sprite.image.width, this.sprite.image.height, (imagePos.hitBox.pos.x + imagePos.hitBox.points[0].x - camera.x), ((imagePos.hitBox.pos.y + imagePos.hitBox.points[3].y - camera.y)), this.sprite.image.width, this.sprite.image.height);
 		   

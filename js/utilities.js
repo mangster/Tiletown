@@ -16,6 +16,16 @@ function compareZ(a,b) {
   return 0;
 }
 
+function compareZpos(a,b) {
+	if (a.zPos < b.zPos){
+		return -1;
+	}
+	if (a.zPos > b.zPos){
+		return 1;
+	}
+	return 0;
+}
+
 function randNum( min, max ) {
     return Math.random() * ( max - min ) + min;
 };

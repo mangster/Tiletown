@@ -15,9 +15,10 @@ function Entity (type, xPos, yPos, volume, direction, speed, heightScale, jumpHe
       new SAT.Vector(cellPoints.point4.x, cellPoints.point4.y)
     ]);
 
+    this.zPos = 1;
     
-    
-    this.z = this.hitBox.pos.x + this.hitBox.pos.y;
+    this.z = this.hitBox.pos.x + this.hitBox.pos.y  + 1000*this.zPos;
+	//this.z = (this.hitBox.pos.x + this.hitBox.points[1].x) + (this.hitBox.pos.y - this.hitBox.points[1].y);
 
     this.speed = speed;
     this.direction = direction;
@@ -101,8 +102,8 @@ function Entity (type, xPos, yPos, volume, direction, speed, heightScale, jumpHe
             this.hitBox.pos.x += this.vx;
             this.hitBox.pos.y += this.vy;
             this.jumpStep += this.jumpSpeed;
-            //this.z = this.hitBox.pos.x + this.hitBox.pos.y;
-			this.z = (this.hitBox.pos.x + this.hitBox.points[1].x) + (this.hitBox.pos.y + this.hitBox.points[1].y);
+            this.z = this.hitBox.pos.x + this.hitBox.pos.y  + 1000*this.zPos;
+			//this.z = (this.hitBox.pos.x) + (this.hitBox.pos.y - this.hitBox.points[1].y);
         }
         else if (this.type == "player"){
             var y = 0;

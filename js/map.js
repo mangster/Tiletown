@@ -25,7 +25,8 @@ for (var i = 0; i < grid.nodes.length; i++){
 		map.createTile(tile.type, tile.x * tileSize, tile.y * tileSize);
 	}
 }
-
+map.entities[23].zPos = 40;
+//console.log(map.entities[1].z);
 
 //Map Class
 function Map(){
@@ -36,19 +37,19 @@ function Map(){
 		//create tile 
 		if (yPos > 300 && yPos < 350){
 			if (type > 0){
-				var tile = new Tile("cityTiles_073", xPos, yPos, this.tileSize, this.tileSize/3);
+				var tile = new Tile("cityTiles_073", 0, xPos, yPos, this.tileSize, this.tileSize/3);
 			}
 			else{
-				var tile = new Tile("cityTiles_064", xPos, yPos, this.tileSize, this.tileSize/3);
+				var tile = new Tile("cityTiles_064", 0, xPos, yPos, this.tileSize, this.tileSize/3);
 			}
 		}
 		else{
 			if (type > 0){
 				//var tile = new Tile("cityTiles_097", xPos, yPos, this.tileSize, this.tileSize/3);
-				var tile = new Tile("cityTiles_066", xPos, yPos, this.tileSize, this.tileSize/3);
+				var tile = new Tile("cityTiles_066", 0, xPos, yPos, this.tileSize, this.tileSize/3);
 			}
 			else{
-				var tile = new Tile("cityTiles_067", xPos, yPos, this.tileSize, this.tileSize/3);
+				var tile = new Tile("cityTiles_067", 0, xPos, yPos, this.tileSize, this.tileSize/3);
 			}	
 		}		
 		this.entities.push(tile);
@@ -70,7 +71,8 @@ function Map(){
     }
     this.update = function(){
         //sort by depth
-        this.entities.sort(compareZ);
+		this.entities.sort(compareZ);
+		//this.entities.sort(compareZpos);
         //move all entities
         for ( var i = 0; i < this.entities.length; i++ ) {
             var p = this.entities[i];
